@@ -96,10 +96,10 @@ jobs:
         run: |
           kubectl apply -f k8s/backend-deployment.yaml -n $EKS_NAMESPACE
           kubectl apply -f k8s/backend-service.yaml -n $EKS_NAMESPACE
-          kubectl set image deployment/tienda-backend \
+          kubectl set image deployment/libreria-backend \
             backend=$ECR_REGISTRY/${ECR_REPO_BACKEND}:${IMAGE_TAG} \
             -n $EKS_NAMESPACE
-          kubectl rollout status deployment/tienda-backend -n $EKS_NAMESPACE
+          kubectl rollout status deployment/libreria-backend -n $EKS_NAMESPACE
 
       # ---------- Actualizar FRONTEND en EKS ----------
       - name: Actualizar FRONTEND en EKS
@@ -109,10 +109,10 @@ jobs:
         run: |
           kubectl apply -f k8s/frontend-deployment.yaml -n $EKS_NAMESPACE
           kubectl apply -f k8s/frontend-service.yaml -n $EKS_NAMESPACE
-          kubectl set image deployment/tienda-frontend \
+          kubectl set image deployment/libreria-frontend \
             frontend=$ECR_REGISTRY/${ECR_REPO_FRONTEND}:${IMAGE_TAG} \
             -n $EKS_NAMESPACE
-          kubectl rollout status deployment/tienda-frontend -n $EKS_NAMESPACE
+          kubectl rollout status deployment/libreria-frontend -n $EKS_NAMESPACE
 
       # ---------- HPA (si existen los YAML) ----------
       - name: Aplicar HPA (opcional)
