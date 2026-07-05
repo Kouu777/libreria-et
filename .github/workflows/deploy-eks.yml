@@ -1,4 +1,4 @@
-name: CI/CD Tienda Perritos EKS
+name: CI/CD Libreria EKS
 
 on:
   push:
@@ -7,9 +7,9 @@ on:
 
 env:
   # Repos de ECR (no son secretos, solo nombres)
-  ECR_REPO_FRONTEND: tienda-frontend
-  ECR_REPO_BACKEND: tienda-backend
-  ECR_REPO_DB: tienda-db
+  ECR_REPO_FRONTEND: libreria-frontend
+  ECR_REPO_BACKEND: libreria-backend
+  ECR_REPO_DB: libreria-db
 
 jobs:
   build-and-deploy:

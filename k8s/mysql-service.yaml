@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tienda-db
-  namespace: tienda
+  name: libreria-db
+  namespace: libreria
 spec:
   selector:
-    app: tienda-db
+    app: libreria-db
   ports:
     - protocol: TCP
       port: 3306

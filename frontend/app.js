@@ -5,9 +5,9 @@
 // Determinar la URL base de la API según el host
 // frontend/app.js
 
-const API_BASE = "/api/productos";
+const API_BASE = "/api/libros"; // Cambiado a la ruta correcta para libros
 
-// Ejemplo: const API_BASE = "http://10.0.2.30:3001/api/productos";
+// Ejemplo: const API_BASE = "http://10.0.2.30:3001/api/libros";
 
 
 let editandoId = null;
@@ -32,13 +32,13 @@ function setStatus(mensaje, tipo = "ok") {
 async function cargarProductos() {
   try {
     const res = await fetch(API_BASE);
-    if (!res.ok) throw new Error("Error al cargar productos");
+    if (!res.ok) throw new Error("Error al cargar libros");
     const data = await res.json();
     renderProductos(data);
-    setStatus("Productos cargados correctamente.", "ok");
+    setStatus("Libros cargados correctamente.", "ok");
   } catch (err) {
     console.error(err);
-    setStatus("No se pudieron cargar los productos. ¿Está el backend levantado?", "error");
+    setStatus("No se pudieron cargar los libros. ¿Está el backend levantado?", "error");
   }
 }
 
@@ -49,8 +49,8 @@ function renderProductos(productos) {
 
     tr.innerHTML = `
       <td>${p.id}</td>
-      <td>${p.nombre}</td>
-      <td>${p.descripcion || ""}</td>
+      <td>${p.titulo}</td>
+      <td>${p.autor || ""}</td>
       <td>$${Number(p.precio).toFixed(2)}</td>
       <td>${p.stock}</td>
       <td>
@@ -73,7 +73,7 @@ function renderProductos(productos) {
   document.querySelectorAll(".btn-eliminar").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-id");
-      if (confirm("¿Seguro que deseas eliminar este producto?")) {
+      if (confirm("¿Seguro que deseas eliminar este libro?")) {
         eliminarProducto(id);
       }
     });
@@ -82,7 +82,7 @@ function renderProductos(productos) {
 
 function limpiarFormulario() {
   editandoId = null;
-  formTitle.textContent = "Nuevo producto";
+  formTitle.textContent = "Nuevo libro";
   inputNombre.value = "";
   inputDescripcion.value = "";
   inputPrecio.value = "";
@@ -91,15 +91,15 @@ function limpiarFormulario() {
 
 function obtenerDatosFormulario() {
   return {
-    nombre: inputNombre.value.trim(),
-    descripcion: inputDescripcion.value.trim(),
+    titulo: inputNombre.value.trim(),
+    autor: inputDescripcion.value.trim(),
     precio: parseFloat(inputPrecio.value),
     stock: parseInt(inputStock.value, 10),
   };
 }
 
 function validarProducto(prod) {
-  if (!prod.nombre) return "El nombre es obligatorio.";
+  if (!prod.titulo) return "El título es obligatorio.";
   if (isNaN(prod.precio) || prod.precio < 0) return "El precio debe ser un número mayor o igual a 0.";
   if (isNaN(prod.stock) || prod.stock < 0) return "El stock debe ser un número mayor o igual a 0.";
   return null;
@@ -133,45 +133,45 @@ async function guardarProducto() {
 
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      throw new Error(data.message || "Error al guardar el producto");
+      throw new Error(data.message || "Error al guardar el libro");
     }
 
     limpiarFormulario();
     await cargarProductos();
-    setStatus(editandoId ? "Producto actualizado correctamente." : "Producto creado correctamente.", "ok");
+    setStatus(editandoId ? "Libro actualizado correctamente." : "Libro creado correctamente.", "ok");
   } catch (err) {
     console.error(err);
-    setStatus("Ocurrió un error al guardar el producto.", "error");
+    setStatus("Ocurrió un error al guardar el libro.", "error");
   }
 }
 
 async function editarProducto(id) {
   try {
     const res = await fetch(`${API_BASE}/${id}`);
-    if (!res.ok) throw new Error("No se pudo obtener el producto");
+    if (!res.ok) throw new Error("No se pudo obtener el libro");
     const p = await res.json();
     editandoId = p.id;
-    formTitle.textContent = `Editar producto #${p.id}`;
-    inputNombre.value = p.nombre;
-    inputDescripcion.value = p.descripcion || "";
+    formTitle.textContent = `Editar libro #${p.id}`;
+    inputNombre.value = p.titulo;
+    inputDescripcion.value = p.autor || "";
     inputPrecio.value = p.precio;
     inputStock.value = p.stock;
-    setStatus("Editando producto.", "ok");
+    setStatus("Editando libro.", "ok");
   } catch (err) {
     console.error(err);
-    setStatus("No se pudo cargar el producto para editarlo.", "error");
+    setStatus("No se pudo cargar el libro para editarlo.", "error");
   }
 }
 
 async function eliminarProducto(id) {
   try {
     const res = await fetch(`${API_BASE}/${id}`, { method: "DELETE" });
-    if (!res.ok) throw new Error("Error al eliminar producto");
+    if (!res.ok) throw new Error("Error al eliminar libro");
     await cargarProductos();
-    setStatus("Producto eliminado correctamente.", "ok");
+    setStatus("Libro eliminado correctamente.", "ok");
   } catch (err) {
     console.error(err);
-    setStatus("No se pudo eliminar el producto.", "error");
+    setStatus("No se pudo eliminar el libro.", "error");
   }
 }
 

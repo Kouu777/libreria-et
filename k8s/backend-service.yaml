@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tienda-backend
-  namespace: tienda
+  name: libreria-backend
+  namespace: libreria
 spec:
   selector:
-    app: tienda-backend
+    app: libreria-backend
   ports:
     - port: 3001
       targetPort: 3001

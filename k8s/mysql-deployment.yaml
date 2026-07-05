@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tienda-db
-  namespace: tienda
+  name: libreria-db
+  namespace: libreria
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tienda-db
+      app: libreria-db
   template:
     metadata:
       labels:
-        app: tienda-db
+        app: libreria-db
     spec:
       containers:
         - name: mysql
-          image: 471266839252.dkr.ecr.us-east-1.amazonaws.com/tienda-db:eks-v1 # Colocar uri de tu imagen en ECR
+          image: 443310978640.dkr.ecr.us-east-1.amazonaws.com/libreria-db:eks-v1 # Colocar uri de tu imagen en ECR
           ports:
             - containerPort: 3306
           env:

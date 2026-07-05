@@ -1,17 +1,17 @@
-CREATE DATABASE IF NOT EXISTS tienda_perritos;
-USE tienda_perritos;
+CREATE DATABASE IF NOT EXISTS tienda_libreria;
+USE tienda_libreria;
 
-CREATE TABLE IF NOT EXISTS productos (
+CREATE TABLE IF NOT EXISTS libros (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    descripcion VARCHAR(255),
+    titulo VARCHAR(200) NOT NULL,
+    autor VARCHAR(200) NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
     stock INT NOT NULL
 );
 
-INSERT INTO productos (nombre, descripcion, precio, stock) VALUES
-('Alimento Cachorro Premium', 'Sabor a pollo, razas pequenas', 19990, 15),
-('Alimento Adulto Light', 'Control de peso, razas medianas', 17990, 8),
-('Snacks Dentales', 'Ayuda a la limpieza dental', 5990, 30),
-('Alimento Adulto Pedigree', 'Sabor carne', 15990, 40),
+INSERT INTO libros (titulo, autor, precio, stock) VALUES
+('El principito', 'Antoine de Saint-Exupéry', 15000, 10),
+('Cien años de soledad', 'Gabriel García Márquez', 20000, 5),
+('Crimen y Castigo', 'Fyodor Dostoyevsky', 18000, 8),
+('Don Quijote de la Mancha', 'Miguel de Cervantes', 25000, 3),
 ('Bravery pollo Adulto raza pequena', 'Sabor a pollo', 25990, 20);

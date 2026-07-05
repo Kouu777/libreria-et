@@ -2,113 +2,178 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Tienda de Alimentos para Perritos &#128054;</title>
+  <title>Libreria de Libros &#128054;</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    :root {
+      --bg: #f7efe6;
+      --panel: #fffdf8;
+      --text: #c8af9d;
+      --accent: #7a3f1d;
+      --accent-dark: #5b2c14;
+      --line: #e5d8c4;
+      --success: #2f7d4f;
+      --error: #b42318;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: Georgia, "Times New Roman", serif;
       margin: 0;
       padding: 0;
-      background: #f5f5f5;
+      background: linear-gradient(135deg, #f7efe6 0%, #efe2cb 100%);
+      color: var(--text);
     }
+
     header {
-      background: #3b82f6;
+      background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
       color: white;
-      padding: 16px;
+      padding: 28px 20px;
       text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      margin: 0;
+      opacity: 0.95;
+      font-size: 1rem;
+    }
+
     main {
-      max-width: 1000px;
-      margin: 20px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      max-width: 1040px;
+      margin: 24px auto;
+      background: var(--panel);
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--line);
     }
+
     h1, h2 {
       margin-top: 0;
+      color: var(--accent-dark);
     }
+
     .actions {
       margin-bottom: 16px;
     }
+
     button {
-      padding: 8px 16px;
+      padding: 9px 16px;
       margin-right: 8px;
       border: none;
-      border-radius: 4px;
+      border-radius: 999px;
       cursor: pointer;
-      background: #3b82f6;
+      background: var(--accent);
       color: white;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 10px rgba(122, 63, 29, 0.2);
     }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(122, 63, 29, 0.25);
+    }
+
     button.secondary {
-      background: #6b7280;
+      background: #8c7056;
+      box-shadow: none;
     }
+
     button.danger {
-      background: #ef4444;
+      background: #c43d2c;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 16px;
+      overflow: hidden;
+      border-radius: 10px;
     }
+
     th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
+      border: 1px solid var(--line);
+      padding: 10px 8px;
       text-align: left;
     }
+
     th {
-      background: #e5e7eb;
+      background: #f1e0c8;
+      color: var(--accent-dark);
     }
+
     tr:nth-child(even) {
-      background: #f9fafb;
+      background: #fcf6ee;
     }
+
     .form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 10px;
+      gap: 12px;
       margin-top: 16px;
     }
+
     label {
       display: block;
       font-weight: bold;
       margin-bottom: 4px;
+      color: var(--accent-dark);
     }
+
     input, textarea {
       width: 100%;
-      padding: 6px;
-      border-radius: 4px;
-      border: 1px solid #d1d5db;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
       box-sizing: border-box;
+      background: #fffcf7;
+      font-family: inherit;
     }
+
+    input:focus, textarea:focus {
+      outline: 2px solid rgba(122, 63, 29, 0.2);
+      border-color: var(--accent);
+    }
+
     .status {
-      margin-top: 10px;
-      font-size: 0.9rem;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
     }
+
     .status.ok {
-      color: #16a34a;
+      color: var(--success);
     }
+
     .status.error {
-      color: #dc2626;
+      color: var(--error);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Tienda de Alimentos para Perritos &#128054;</h1>
-    <p>Gestión CRUD de productos en contenedores Docker (Frontend + Backend + MySQL)</p>
+    <h1>Librería El Rincón 📚</h1>
+    <p>Gestión elegante del catálogo de libros en contenedores Docker</p>
   </header>
   <main>
     <section>
-      <h2>Productos</h2>
+      <h2>Catálogo</h2>
       <div class="actions">
-        <button id="btnCargar">Cargar Productos</button>
+        <button id="btnCargar">Cargar Libros</button>
       </div>
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
+            <th>Titulo</th>
+            <th>Autor</th>
             <th>Precio</th>
             <th>Stock</th>
             <th>Acciones</th>
@@ -121,15 +186,15 @@
     </section>
 
     <section>
-      <h2 id="formTitle">Nuevo producto</h2>
+      <h2 id="formTitle">Agregar libro</h2>
       <div class="form-grid">
         <div>
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" placeholder="Ej: Alimento Premium Cachorro" />
+          <label for="nombre">Titulo</label>
+          <input type="text" id="nombre" placeholder="Ej: Cien años de soledad" />
         </div>
         <div>
-          <label for="descripcion">Descripción</label>
-          <textarea id="descripcion" rows="2" placeholder="Ej: Sabor pollo, razas pequeñas"></textarea>
+          <label for="descripcion">Autor</label>
+          <textarea id="descripcion" rows="2" placeholder="Ej: Gabriel García Márquez"></textarea>
         </div>
         <div>
           <label for="precio">Precio</label>

@@ -1,13 +1,13 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: tienda-backend-hpa
-  namespace: tienda
+  name: libreria-backend-hpa
+  namespace: libreria
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: tienda-backend
+    name: libreria-backend
   minReplicas: 2
   maxReplicas: 10
   metrics:

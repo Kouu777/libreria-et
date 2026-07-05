@@ -1,7 +1,7 @@
 {
-  "name": "tienda-perritos-backend",
+  "name": "tienda-libreria-backend",
   "version": "1.0.0",
-  "description": "API backend para tienda de alimentos para perritos",
+  "description": "API backend para libreria de libros",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
